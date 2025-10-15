@@ -10,7 +10,6 @@ import {
   Settings, 
   LogOut, 
   LayoutDashboard,
-  Bell,
   MessageCircle,
   HelpCircle,
   Sparkles,
@@ -23,6 +22,7 @@ import {
   Info,
   Contact
 } from 'lucide-react';
+import NotificationIcon from './NotificationIcon';
 
 const Navbar = () => {
   const { user, logout, isLoading } = useAuth();
@@ -89,7 +89,6 @@ const Navbar = () => {
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=6366f1&color=fff&bold=true&size=128`;
   };
 
-
   // Base navigation items for all users
   const baseNavigationItems = [
     { path: '/', label: 'Home', icon: Home },
@@ -136,11 +135,15 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">M</span>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                <img 
+                  src="/logo.png" 
+                  alt="MkulimaHub" 
+                  className="w-8 h-8 object-contain"
+                />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                MkulimaHub
+              <span className="text-xl font-bold text-gray-900 dark:text-white">
+                Mkulima<span className="text-emerald-600">Hub</span>
               </span>
             </div>
             <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-6 w-20 rounded"></div>
@@ -162,14 +165,15 @@ const Navbar = () => {
             <div className="flex items-center justify-between">
               {/* Logo */}
               <Link to="/" className="flex items-center space-x-2 group flex-shrink-0">
-                <div className="relative">
-                  <div className="w-9 h-9 bg-gradient-to-r from-emerald-500 to-green-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25">
-                    <span className="text-white font-bold text-base">M</span>
-                  </div>
-                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full border-2 border-white dark:border-gray-900"></div>
+                <div className="flex items-center justify-center">
+                  <img 
+                    src="/logo.png" 
+                    alt="MkulimaHub" 
+                    className="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-200"
+                  />
                 </div>
-                <span className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                  MkulimaHub
+                <span className="text-lg font-bold text-gray-900 dark:text-white">
+                  Mkulima<span className="text-emerald-600">Hub</span>
                 </span>
               </Link>
 
@@ -205,9 +209,11 @@ const Navbar = () => {
                 {user ? (
                   <>
                     {/* Notifications */}
-                    <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 relative">
-                      <Bell size={16} className="text-gray-600 dark:text-gray-400" />
-                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                    <button className="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all duration-200">
+                      <NotificationIcon 
+                        size={16} 
+                        className="text-gray-600 dark:text-gray-400" 
+                      />
                     </button>
 
                     {/* Quick Logout */}
@@ -229,7 +235,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                       to="/register"
-                      className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-medium rounded-lg shadow-lg shadow-emerald-500/25 transition-all duration-200 text-sm"
+                      className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-all duration-200 text-sm"
                     >
                       Sign Up
                     </Link>
@@ -237,7 +243,6 @@ const Navbar = () => {
                 )}
               </div>
             </div>
-
 
             {/* Navigation Links - Horizontal Scroll for Mobile & Tablet */}
             <div className="w-full overflow-x-auto scrollbar-hide">
@@ -272,18 +277,18 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex items-center space-x-3">
               <Link to="/" className="flex items-center space-x-3 group">
-                <div className="relative">
-                  <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-green-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:scale-110 transition-transform duration-200">
-                    <span className="text-white font-bold text-lg">M</span>
-                  </div>
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full border-2 border-white dark:border-gray-900"></div>
+                <div className="flex items-center justify-center">
+                  <img 
+                    src="/logo.png" 
+                    alt="MkulimaHub" 
+                    className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
+                  />
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                  MkulimaHub
+                <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Mkulima<span className="text-emerald-600">Hub</span>
                 </span>
               </Link>
             </div>
-
 
             {/* Desktop Navigation */}
             <div className="flex items-center space-x-1">
@@ -331,7 +336,7 @@ const Navbar = () => {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="p-2.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 group relative"
+                className="p-2.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 group"
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 <div className="relative w-5 h-5">
@@ -352,7 +357,6 @@ const Navbar = () => {
                     }`} 
                   />
                 </div>
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               </button>
 
               {/* Quick Logout for Desktop */}
@@ -371,9 +375,11 @@ const Navbar = () => {
               {user ? (
                 <div className="flex items-center space-x-3">
                   {/* Notifications */}
-                  <button className="p-2.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 relative">
-                    <Bell size={18} className="text-gray-600 dark:text-gray-400" />
-                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                  <button className="p-2.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all duration-200">
+                    <NotificationIcon 
+                      size={18} 
+                      className="text-gray-600 dark:text-gray-400" 
+                    />
                   </button>
 
                   {/* Profile Dropdown */}
@@ -505,7 +511,7 @@ const Navbar = () => {
                   </Link>
                   <Link
                     to="/register"
-                    className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-medium rounded-xl shadow-lg shadow-emerald-500/25 transition-all duration-200 transform hover:scale-105"
+                    className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl transition-all duration-200 transform hover:scale-105"
                   >
                     Sign Up
                   </Link>

@@ -10,7 +10,11 @@ import {
   Clock,
   Globe,
   CheckCircle,
-  Sparkles
+  Sparkles,
+  Star,
+  Shield,
+  Users,
+  Target
 } from 'lucide-react';
 
 const ContactPage = () => {
@@ -29,7 +33,7 @@ const ContactPage = () => {
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
     setIsSubmitting(false);
-    alert('Thank you for your message! Our agricultural experts will contact you within 2 hours.');
+    alert('Thank you for your message! Our agricultural experts will contact you ...');
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
@@ -41,71 +45,127 @@ const ContactPage = () => {
   };
 
   const contactMethods = [
-    {
-      icon: <MessageCircle className="w-4 h-4" />,
-      title: "Live Chat",
-      description: "Instant farming advice",
-      details: "Start chatting now",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: <Phone className="w-4 h-4" />,
+     {
+      icon: <Phone className="w-5 h-5" />,
       title: "Phone Support",
       description: "Direct expert consultation",
       details: "+254 711 123 456",
-      color: "from-green-500 to-emerald-500"
+      color: "from-emerald-500 to-green-500"
     },
     {
-      icon: <Mail className="w-4 h-4" />,
+      icon: <Mail className="w-5 h-5" />,
       title: "Email",
       description: "Detailed inquiries",
       details: "support@mkulimahub.com",
-      color: "from-purple-500 to-pink-500"
+      color: "from-blue-500 to-cyan-500"
     }
   ];
 
   const supportFeatures = [
     {
-      icon: <Clock className="w-3 h-3" />,
-      text: "2-4 hour response time"
-    },
-    {
-      icon: <Globe className="w-3 h-3" />,
+      icon: <Globe className="w-4 h-4" />,
       text: "Multilingual support"
     },
     {
-      icon: <CheckCircle className="w-3 h-3" />,
+      icon: <CheckCircle className="w-4 h-4" />,
       text: "Certified experts"
+    },
+    {
+      icon: <Shield className="w-4 h-4" />,
+      text: "Secure & private"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900/20 transition-colors duration-300 pt-16">
-    
-      {/* Main Content - Single Screen Layout */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-6">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-emerald-900/20 transition-colors duration-300">
+      
+      {/* Hero Banner */}
+      <section className="relative bg-gradient-to-r from-emerald-500 via-green-500 to-cyan-500 overflow-hidden pt-12">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-float"></div>
+          <div className="absolute top-0 right-0 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-xl animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-cyan-200 rounded-full mix-blend-multiply filter blur-xl animate-float" style={{animationDelay: '4s'}}></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          <div className="text-center">
+            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+              Contact Us
+            </h1>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button className="bg-white text-emerald-600 hover:bg-green-50 font-semibold px-8 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 flex items-center gap-2">
+                <Phone className="w-5 h-5" />
+                Call Now
+              </button>
+              <button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-xl border border-green-400 transition-all duration-200 transform hover:scale-105 flex items-center gap-2">
+                <MessageCircle className="w-5 h-5" />
+                Start Chat
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Wave Divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg 
+            className="w-full h-12 text-green-50 dark:text-gray-900" 
+            viewBox="0 0 1200 120" 
+            preserveAspectRatio="none"
+          >
+            <path 
+              d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+              opacity=".25" 
+              className="fill-current"
+            ></path>
+            <path 
+              d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+              opacity=".5" 
+              className="fill-current"
+            ></path>
+            <path 
+              d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+              className="fill-current"
+            ></path>
+          </svg>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="px-4 sm:px-6 lg:px-8 py-12 lg:py-16 -mt-1">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8">
             
             {/* Contact Methods - Left Side */}
-            <div className="lg:col-span-1 space-y-4">
+            <div className="lg:col-span-1 space-y-6">
+              <div className="text-center lg:text-left mb-6">
+                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+                  How Can We Help You?
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400 text-lg">
+                  Choose your preferred way to connect
+                </p>
+              </div>
+
               {contactMethods.map((method, index) => (
                 <div
                   key={index}
-                  className="group p-4 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-200 cursor-pointer"
+                  className="group p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300 cursor-pointer hover:translate-y-1"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 bg-gradient-to-r ${method.color} rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-200`}>
+                  <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 bg-gradient-to-r ${method.color} rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-200 shadow-lg`}>
                       {method.icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">
+                      <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-2">
                         {method.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
                         {method.description}
                       </p>
-                      <p className="text-blue-600 dark:text-blue-400 font-medium text-xs">
+                      <p className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm">
                         {method.details}
                       </p>
                     </div>
@@ -114,16 +174,18 @@ const ContactPage = () => {
               ))}
 
               {/* Support Features */}
-              <div className="bg-gradient-to-br from-blue-500 to-emerald-500 rounded-xl p-4 text-white">
-                <div className="flex items-center gap-2 mb-3">
-                  <Sparkles className="w-4 h-4" />
-                  <h3 className="font-semibold text-sm">Premium Support</h3>
+              <div className="bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl p-6 text-white shadow-lg">
+                <div className="flex items-center gap-3 mb-4">
+                  <Sparkles className="w-5 h-5" />
+                  <h3 className="font-bold text-lg">Premium Support</h3>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {supportFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      {feature.icon}
-                      <span className="text-blue-100 text-xs">{feature.text}</span>
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-white/20 rounded-lg flex items-center justify-center">
+                        {feature.icon}
+                      </div>
+                      <span className="text-green-100 text-sm">{feature.text}</span>
                     </div>
                   ))}
                 </div>
@@ -132,25 +194,25 @@ const ContactPage = () => {
 
             {/* Contact Form - Right Side */}
             <div className="lg:col-span-2">
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg flex items-center justify-center">
-                    <Send className="w-5 h-5 text-white" />
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 h-full">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <Send className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">Send us a Message</h2>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">We'll connect you with the right expert</p>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">Send us a Message</h2>
+                    <p className="text-gray-600 dark:text-gray-400 text-lg">We'll connect you with the right expert</p>
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                         Your Name *
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <User className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                         <input
                           type="text"
                           id="name"
@@ -158,18 +220,18 @@ const ContactPage = () => {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm"
-                          placeholder="Enter your name"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 text-base"
+                          placeholder="Enter your full name"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                         Email Address *
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                         <input
                           type="email"
                           id="email"
@@ -177,7 +239,7 @@ const ContactPage = () => {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm"
+                          className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 text-base"
                           placeholder="your@email.com"
                         />
                       </div>
@@ -185,7 +247,7 @@ const ContactPage = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       What do you need help with? *
                     </label>
                     <select
@@ -194,7 +256,7 @@ const ContactPage = () => {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 text-base"
                     >
                       <option value="">Select topic</option>
                       <option value="pest-control">Pest & Disease Control</option>
@@ -207,17 +269,17 @@ const ContactPage = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="message" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Describe your farming challenge *
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       required
-                      rows="4"
+                      rows="5"
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 text-base resize-none"
                       placeholder="Tell us about your specific farming situation, crops, and challenges..."
                     ></textarea>
                   </div>
@@ -225,47 +287,26 @@ const ContactPage = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 disabled:opacity-50 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50 flex items-center justify-center gap-2 text-sm"
+                    className="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 disabled:opacity-50 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-500/50 flex items-center justify-center gap-3 text-base"
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         Connecting to Expert...
                       </>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
-                        Connect with Expert
+                        <Send className="w-5 h-5" />
+                        Connect with Agricultural Expert
                       </>
                     )}
                   </button>
 
-                  <p className="text-center text-gray-500 dark:text-gray-400 text-xs">
-                    We'll match you with a certified agricultural specialist within 2 hours
-                  </p>
                 </form>
               </div>
             </div>
           </div>
 
-          {/* Quick Info Bar */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700">
-              <MapPin className="w-4 h-4 text-blue-500 mx-auto mb-1" />
-              <div className="text-xs text-gray-600 dark:text-gray-400">Based in</div>
-              <div className="text-sm font-semibold text-gray-900 dark:text-white">Nairobi, Kenya</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700">
-              <Clock className="w-4 h-4 text-green-500 mx-auto mb-1" />
-              <div className="text-xs text-gray-600 dark:text-gray-400">Response Time</div>
-              <div className="text-sm font-semibold text-gray-900 dark:text-white">2-4 Hours</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700">
-              <CheckCircle className="w-4 h-4 text-emerald-500 mx-auto mb-1" />
-              <div className="text-xs text-gray-600 dark:text-gray-400">Experts Available</div>
-              <div className="text-sm font-semibold text-gray-900 dark:text-white">2000+ Certified</div>
-            </div>
-          </div>
         </div>
       </section>
     </div>

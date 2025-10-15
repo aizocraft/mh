@@ -14,6 +14,7 @@ import SettingsPage from './pages/SettingsPage';
 import AdminDashboard from './pages/dashboards/AdminDashboard';
 import FarmerDashboard from './pages/dashboards/FarmerDashboard';
 import ExpertDashboard from './pages/dashboards/ExpertDashboard';
+import UserPage from './pages/dashboards/admin/UserPage.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
@@ -78,6 +79,11 @@ export default function App() {
             <Route path="/settings" element={
               <PageLayout>
                 <SettingsPage />
+              </PageLayout>
+            } />
+            <Route path="/users" element={
+              <PageLayout>
+                <UserPage />
               </PageLayout>
             } />
             

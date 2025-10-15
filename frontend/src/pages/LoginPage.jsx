@@ -12,9 +12,9 @@ import {
   ArrowRight, 
   Sparkles,
   Shield,
-  Leaf,
   User,
-  Target
+  Target,
+  Leaf
 } from 'lucide-react';
 
 const LoginPage = () => {
@@ -74,17 +74,16 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900/20 transition-all duration-500 overflow-hidden">
-      {/* Advanced Background Animation */}
+      {/* Background Animation */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-float"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-float" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-40 left-1/2 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-float" style={{animationDelay: '4s'}}></div>
         
         {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full opacity-60 animate-float"
+            className="absolute w-1 h-1 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full opacity-40 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -100,15 +99,16 @@ const LoginPage = () => {
           {/* Header */}
           <div className="text-center animate-fade-in">
             <Link to="/" className="inline-flex items-center space-x-3 group mb-6">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-green-500 rounded-xl flex items-center justify-center shadow-2xl shadow-emerald-500/25 group-hover:scale-110 transition-transform duration-300">
-                  <Leaf className="w-5 h-5 text-white" />
-                </div>
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full border-2 border-white dark:border-gray-900 animate-pulse"></div>
+              <div className="flex items-center justify-center">
+                <img 
+                  src="/logo.png" 
+                  alt="MkulimaHub" 
+                  className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
               <div className="text-left">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                  Mkulima Hub
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                  Mkulima<span className="text-emerald-600">Hub</span>
                 </h1>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Agricultural Intelligence</p>
               </div>
@@ -126,9 +126,9 @@ const LoginPage = () => {
 
           {/* Login Form */}
           <div className="animate-slide-up" style={{animationDelay: '100ms'}}>
-            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-2xl rounded-2xl p-6 shadow-2xl border border-white/20 dark:border-gray-700/20">
+            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20 dark:border-gray-700/20">
               {error && (
-                <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl animate-shake">
+                <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
                   <div className="flex items-center space-x-2 text-red-700 dark:text-red-300 text-sm">
                     <Shield className="w-4 h-4" />
                     <span>{error}</span>
@@ -251,17 +251,17 @@ const LoginPage = () => {
           {/* Features */}
           <div className="animate-slide-up" style={{animationDelay: '200ms'}}>
             <div className="grid grid-cols-3 gap-3 text-center">
-              <div className="p-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700">
-                <User className="w-3 h-3 text-emerald-500 mx-auto mb-1" />
-                <p className="text-xs text-gray-600 dark:text-gray-400">Expert Network</p>
+              <div className="p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700">
+                <User className="w-4 h-4 text-emerald-500 mx-auto mb-1" />
+                <p className="text-xs font-medium text-gray-700 dark:text-gray-300">Expert Network</p>
               </div>
-              <div className="p-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700">
-                <Shield className="w-3 h-3 text-blue-500 mx-auto mb-1" />
-                <p className="text-xs text-gray-600 dark:text-gray-400">Secure</p>
+              <div className="p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700">
+                <Shield className="w-4 h-4 text-blue-500 mx-auto mb-1" />
+                <p className="text-xs font-medium text-gray-700 dark:text-gray-300">Secure</p>
               </div>
-              <div className="p-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700">
-                <Target className="w-3 h-3 text-green-500 mx-auto mb-1" />
-                <p className="text-xs text-gray-600 dark:text-gray-400">Precision</p>
+              <div className="p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700">
+                <Target className="w-4 h-4 text-green-500 mx-auto mb-1" />
+                <p className="text-xs font-medium text-gray-700 dark:text-gray-300">Precision</p>
               </div>
             </div>
           </div>

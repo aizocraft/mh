@@ -1,34 +1,31 @@
 import { useState, useEffect } from 'react';
+import { userAPI } from '../../../api';
+import UserDistribution from './UserDistribution';
 import { 
   Users, 
   TrendingUp, 
   Activity, 
   DollarSign, 
   MessageCircle,
-  PieChart,
   Cpu,
   Flag,
   UserCheck,
   AlertTriangle,
-  Calendar,
   Database,
   Server,
   Cloud,
-  CreditCard
+  CreditCard,
+  RefreshCw
 } from 'lucide-react';
 
 const Overview = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
-    totalUsers: 1247,
+    totalUsers: 0,
     activeConsultations: 34,
     monthlyRevenue: 450,
     qnaActivity: 89
-  });
-
-  const [userDistribution, setUserDistribution] = useState({
-    farmers: 1087,
-    experts: 142,
-    admins: 18
   });
 
   const [activities, setActivities] = useState([
@@ -52,6 +49,33 @@ const Overview = () => {
     { id: 3, type: 'Question', content: 'Potential misinformation', user: 'user789', severity: 'high' }
   ]);
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const response = await userAPI.getAllUsers();
+      
+      if (response.data?.success && Array.isArray(response.data.users)) {
+        const usersData = response.data.users;
+        setUsers(usersData);
+        
+        // Calculate total users
+        const totalUsers = usersData.length;
+        setStats(prevStats => ({
+          ...prevStats,
+          totalUsers
+        }));
+      }
+    } catch (err) {
+      console.error('Failed to fetch users:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const getActivityIcon = (type) => {
     switch (type) {
       case 'user': return <UserCheck size={16} className="text-blue-500" />;
@@ -62,19 +86,21 @@ const Overview = () => {
     }
   };
 
-  const calculatePercentages = () => {
-    const total = userDistribution.farmers + userDistribution.experts + userDistribution.admins;
-    return {
-      farmers: ((userDistribution.farmers / total) * 100).toFixed(1),
-      experts: ((userDistribution.experts / total) * 100).toFixed(1),
-      admins: ((userDistribution.admins / total) * 100).toFixed(1)
-    };
-  };
-
-  const percentages = calculatePercentages();
+  if (loading) {
+    return (
+      <div className="overview-grid space-y-6 p-6">
+        <div className="flex items-center justify-center min-h-64">
+          <div className="text-center">
+            <RefreshCw className="w-8 h-8 text-emerald-600 animate-spin mx-auto mb-4" />
+            <p className="text-gray-600 dark:text-gray-400">Loading overview...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="overview-grid space-y-6">
+    <div className="overview-grid space-y-6 p-6">
       {/* Compact Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
@@ -144,60 +170,9 @@ const Overview = () => {
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        {/* User Distribution */}
-        <div className="lg:col-span-1 xl:col-span-1 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center space-x-2 mb-6">
-            <PieChart size={20} className="text-gray-600 dark:text-gray-400" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">User Distribution</h3>
-          </div>
-          
-          <div className="space-y-4 mb-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Farmers</span>
-              </div>
-              <div className="text-right">
-                <span className="text-sm font-bold text-gray-900 dark:text-white">{userDistribution.farmers}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">{percentages.farmers}%</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Experts</span>
-              </div>
-              <div className="text-right">
-                <span className="text-sm font-bold text-gray-900 dark:text-white">{userDistribution.experts}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">{percentages.experts}%</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Admins</span>
-              </div>
-              <div className="text-right">
-                <span className="text-sm font-bold text-gray-900 dark:text-white">{userDistribution.admins}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">{percentages.admins}%</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Pie Chart Visualization */}
-          <div className="relative w-32 h-32 mx-auto">
-            <div className="absolute inset-0 rounded-full border-8 border-emerald-500" 
-                 style={{ clipPath: `conic-gradient(transparent 0% ${percentages.farmers}%, transparent ${percentages.farmers}% 100%)` }}></div>
-            <div className="absolute inset-0 rounded-full border-8 border-blue-500" 
-                 style={{ clipPath: `conic-gradient(transparent ${percentages.farmers}% ${parseFloat(percentages.farmers) + parseFloat(percentages.experts)}%, transparent ${parseFloat(percentages.farmers) + parseFloat(percentages.experts)}% 100%)` }}></div>
-            <div className="absolute inset-0 rounded-full border-8 border-purple-500" 
-                 style={{ clipPath: `conic-gradient(transparent ${parseFloat(percentages.farmers) + parseFloat(percentages.experts)}% 100%, transparent 0% 0%)` }}></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-lg font-bold text-gray-900 dark:text-white">100%</span>
-            </div>
-          </div>
+        {/* User Distribution Component */}
+        <div className="lg:col-span-1 xl:col-span-1">
+          <UserDistribution users={users} />
         </div>
 
         {/* System Health */}
@@ -271,11 +246,11 @@ const Overview = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {flaggedContent.map(item => (
-              <div key={item.id} className="p-4 border rounded-lg ${
+              <div key={item.id} className={`p-4 border rounded-lg ${
                 item.severity === 'high' ? 'border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20' :
                 item.severity === 'medium' ? 'border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20' :
                 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50'
-              }">
+              }`}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">{item.type}</span>
                   <div className={`w-2 h-2 rounded-full ${
