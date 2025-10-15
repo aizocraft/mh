@@ -6,9 +6,13 @@ const routes = require('./routes');
 
 const app = express();
 
-// Strict CORS Configuration
+// Get environment variables
+const PORT = process.env.PORT || 5000;
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+// Strict & dynamic CORS Configuration
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -16,13 +20,10 @@ const corsOptions = {
   preflightContinue: false
 };
 
-// Apply CORS middleware
 app.use(cors(corsOptions));
-
-// Essential Middleware
 app.use(express.json());
 
-// Debug Middleware (for development)
+// Debug Middleware (for development only)
 if (process.env.NODE_ENV === 'development') {
   app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
@@ -43,18 +44,16 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-
 // Database connection and server start
 connectDB()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-      console.log(`CORS configured for: http://localhost:5173`);
-      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`✅ Server running on port ${PORT}`);
+      console.log(`🌍 CORS allowed for: ${FRONTEND_URL}`);
+      console.log(`🧭 Environment: ${process.env.NODE_ENV || 'development'}`);
     });
   })
   .catch(err => {
-    console.error('Database connection failed:', err);
+    console.error('❌ Database connection failed:', err);
     process.exit(1);
   });
