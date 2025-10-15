@@ -47,15 +47,13 @@ const ContactPage = () => {
   const contactMethods = [
      {
       icon: <Phone className="w-5 h-5" />,
-      title: "Phone Support",
-      description: "Direct expert consultation",
+      title: "Phone",
       details: "+254 711 123 456",
       color: "from-emerald-500 to-green-500"
     },
     {
       icon: <Mail className="w-5 h-5" />,
       title: "Email",
-      description: "Detailed inquiries",
       details: "support@mkulimahub.com",
       color: "from-blue-500 to-cyan-500"
     }
@@ -94,17 +92,6 @@ const ContactPage = () => {
               Contact Us
             </h1>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-white text-emerald-600 hover:bg-green-50 font-semibold px-8 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 flex items-center gap-2">
-                <Phone className="w-5 h-5" />
-                Call Now
-              </button>
-              <button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-xl border border-green-400 transition-all duration-200 transform hover:scale-105 flex items-center gap-2">
-                <MessageCircle className="w-5 h-5" />
-                Start Chat
-              </button>
-            </div>
           </div>
         </div>
 
@@ -162,9 +149,7 @@ const ContactPage = () => {
                       <h3 className="font-bold text-gray-900 dark:text-white text-lg mb-2">
                         {method.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-                        {method.description}
-                      </p>
+
                       <p className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm">
                         {method.details}
                       </p>
@@ -177,7 +162,7 @@ const ContactPage = () => {
               <div className="bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl p-6 text-white shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
                   <Sparkles className="w-5 h-5" />
-                  <h3 className="font-bold text-lg">Premium Support</h3>
+                  <h3 className="font-bold text-lg">Support Features</h3>
                 </div>
                 <div className="space-y-3">
                   {supportFeatures.map((feature, index) => (

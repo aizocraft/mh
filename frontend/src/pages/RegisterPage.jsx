@@ -106,14 +106,6 @@ const RegisterPage = () => {
     return icons[role] || "👤";
   };
 
-  const getRoleDescription = (role) => {
-    const descriptions = {
-      farmer: 'Manage crops & get expert advice',
-      expert: 'Help farmers & share knowledge',
-      admin: 'Manage platform & users'
-    };
-    return descriptions[role] || '';
-  };
 
   const getPasswordStrengthColor = (strength) => {
     if (strength <= 2) return 'bg-red-500';
@@ -336,9 +328,7 @@ const RegisterPage = () => {
                           {getRoleIcon(role)}
                         </div>
                         <span className="text-xs font-medium capitalize mb-1">{role}</span>
-                        <span className="text-[10px] opacity-80 leading-tight">
-                          {getRoleDescription(role)}
-                        </span>
+
                       </label>
                     ))}
                   </div>

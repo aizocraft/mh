@@ -5,94 +5,151 @@ import Overview from './expert/Overview';
 import Consultations from './expert/Consultations';
 import Questions from './expert/Questions';
 import Schedule from './expert/Schedule';
-import { BarChart3, MessageCircle, Users, Calendar, Star, DollarSign, Shield } from 'lucide-react';
+import { 
+  BarChart3, 
+  MessageCircle, 
+  Users, 
+  Calendar, 
+  Star, 
+  Shield, 
+  CheckCircle,
+  Sun,
+  Moon,
+  ChevronDown,
+  Settings,
+  Bell
+} from 'lucide-react';
 
 const ExpertDashboard = () => {
   const { user } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [activeTab, setActiveTab] = useState('overview');
 
+  const navigationTabs = [
+    { id: 'overview', label: 'Overview', icon: BarChart3 },
+    { id: 'consultations', label: 'Consultations', icon: MessageCircle },
+    { id: 'questions', label: 'Questions', icon: Users },
+    { id: 'schedule', label: 'Schedule', icon: Calendar }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      {/* Header Section */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center space-x-6 mb-6 lg:mb-0">
-              <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center text-white text-xl font-bold">
-                {user?.name?.split(' ').map(n => n[0]).join('') || 'EJ'}
-              </div>
-              <div className="flex-1">
-                <h1 className="text-3xl font-bold mb-2">Expert Dashboard</h1>
-                <p className="text-purple-100 text-lg mb-3">
-                  Welcome back, {user?.name || 'Dr. Jane Expert'}!
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <div className="inline-flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-sm">
-                    <Shield size={14} />
-                    <span>Verified Agronomist</span>
-                  </div>
-                  <div className="inline-flex items-center space-x-1 px-3 py-1 bg-white/20 rounded-full text-sm">
-                    <Star size={14} className="fill-current" />
-                    <span>10 years experience</span>
-                  </div>
+      {/* Header */}
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 space-y-4 lg:space-y-0">
+            {/* Left Section - Title and User Info */}
+            <div className="flex items-center space-x-4">
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <Shield className="w-6 h-6 text-white" />
                 </div>
               </div>
+              <div className="flex-1 min-w-0">
+                <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white truncate">
+                  Expert Dashboard
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400 text-sm lg:text-base mt-1">
+                  Welcome back, <span className="font-semibold text-purple-600 dark:text-purple-400">{user?.name || 'Expert'}</span>
+                </p>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <button 
-                onClick={toggleTheme}
-                className="p-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors duration-200"
-              >
-                {theme === 'light' ? '🌙' : '☀️'}
-              </button>
+
+            {/* Right Section - Badges and Actions */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+              {/* Status Badges */}
+              <div className="flex items-center space-x-2">
+                <span className="inline-flex items-center space-x-2 px-3 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-xl text-sm font-medium border border-purple-200 dark:border-purple-800">
+                  <Shield size={16} />
+                  <span className="hidden sm:inline">Verified Agronomist</span>
+                  <span className="sm:hidden">Agronomist</span>
+                </span>
+                <span className="inline-flex items-center space-x-2 px-3 py-2 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-xl text-sm font-medium border border-amber-200 dark:border-amber-800">
+                  <Star size={16} className="fill-current" />
+                  <span>10 years experience</span>
+                </span>
+                <span className="inline-flex items-center space-x-2 px-3 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-xl text-sm font-medium border border-emerald-200 dark:border-emerald-800">
+                  <CheckCircle size={16} />
+                  <span>Available</span>
+                </span>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center space-x-2">
+                {/* Notifications */}
+                <button className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl transition-colors duration-200 relative">
+                  <Bell size={18} className="text-gray-600 dark:text-gray-400" />
+                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
+                </button>
+
+                {/* Theme Toggle */}
+                <button 
+                  onClick={toggleTheme}
+                  className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl transition-colors duration-200 group"
+                  aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                >
+                  <div className="relative w-5 h-5">
+                    <Sun 
+                      size={20} 
+                      className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                        theme === 'light' 
+                          ? 'rotate-0 scale-100 text-orange-500' 
+                          : 'rotate-90 scale-0 text-gray-400'
+                      }`} 
+                    />
+                    <Moon 
+                      size={20} 
+                      className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                        theme === 'dark' 
+                          ? 'rotate-0 scale-100 text-blue-400' 
+                          : '-rotate-90 scale-0 text-gray-400'
+                      }`} 
+                    />
+                  </div>
+                </button>
+
+                {/* Settings */}
+                <button className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl transition-colors duration-200">
+                  <Settings size={18} className="text-gray-600 dark:text-gray-400" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Navigation Tabs */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+        {/* Navigation Tabs */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex space-x-8">
-            <button 
-              className={`nav-tab ${activeTab === 'overview' ? 'nav-tab-active' : ''}`}
-              onClick={() => setActiveTab('overview')}
-            >
-              <BarChart3 size={18} />
-              <span>Overview</span>
-            </button>
-            <button 
-              className={`nav-tab ${activeTab === 'consultations' ? 'nav-tab-active' : ''}`}
-              onClick={() => setActiveTab('consultations')}
-            >
-              <MessageCircle size={18} />
-              <span>Consultations</span>
-            </button>
-            <button 
-              className={`nav-tab ${activeTab === 'questions' ? 'nav-tab-active' : ''}`}
-              onClick={() => setActiveTab('questions')}
-            >
-              <Users size={18} />
-              <span>Questions</span>
-            </button>
-            <button 
-              className={`nav-tab ${activeTab === 'schedule' ? 'nav-tab-active' : ''}`}
-              onClick={() => setActiveTab('schedule')}
-            >
-              <Calendar size={18} />
-              <span>Schedule</span>
-            </button>
+          <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
+            {navigationTabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center space-x-2 px-4 py-3 rounded-t-lg border-b-2 transition-all duration-200 flex-shrink-0 min-w-0 ${
+                    isActive
+                      ? 'bg-purple-50 dark:bg-purple-900/20 border-purple-500 text-purple-700 dark:text-purple-300'
+                      : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                  }`}
+                >
+                  <Icon size={18} className="flex-shrink-0" />
+                  <span className="font-medium text-sm whitespace-nowrap">{tab.label}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {activeTab === 'overview' && <Overview />}
-        {activeTab === 'consultations' && <Consultations />}
-        {activeTab === 'questions' && <Questions />}
-        {activeTab === 'schedule' && <Schedule />}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+          {activeTab === 'overview' && <Overview />}
+          {activeTab === 'consultations' && <Consultations />}
+          {activeTab === 'questions' && <Questions />}
+          {activeTab === 'schedule' && <Schedule />}
+        </div>
       </div>
     </div>
   );

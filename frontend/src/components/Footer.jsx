@@ -10,8 +10,21 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           {/* Logo and Copyright */}
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg flex items-center justify-center">
+          <div className="flex items-center space-x-3">
+            <img 
+              src="/logo.png" 
+              alt="Mkulima Hub Logo" 
+              className="w-8 h-8 object-contain"
+              onError={(e) => {
+                // Fallback if logo doesn't exist
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            <div 
+              className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg flex items-center justify-center hidden"
+              style={{ display: 'none' }}
+            >
               <span className="text-white text-sm font-bold">M</span>
             </div>
             <span className="text-gray-600 dark:text-gray-400 text-sm">
@@ -46,6 +59,13 @@ const Footer = () => {
               Contact
             </Link>
           </div>
+        </div>
+        
+        {/* Additional Footer Information */}
+        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+          <p className="text-gray-500 dark:text-gray-400 text-xs">
+            Empowering farmers with technology and innovation for sustainable agriculture.
+          </p>
         </div>
       </div>
     </footer>
